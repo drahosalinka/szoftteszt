@@ -23,18 +23,28 @@
             romanNum += giveHundreds(hundreds);
             romanNum += giveTens(tens);
             romanNum += giveOnes(ones);
-           
-            
+        }
+        else if(lengthOfN == 3) {
+            hundreds = String(n).charAt(0);
+            tens = String(n).charAt(1);
+            ones = String(n).charAt(2);
 
-            
-        }  
-        else if(lengthOfN == 1 && n < 4) {
+            romanNum += giveHundreds(hundreds);
+            romanNum += giveTens(tens);
+            romanNum += giveOnes(ones);
+        }
+        else if(lengthOfN == 2) {
+            tens = String(n).charAt(0);
+            ones = String(n).charAt(1);
+
+            romanNum += giveTens(tens);
+            romanNum += giveOnes(ones);
+        }
+        else if(lengthOfN == 1) {
             ones = String(n).charAt(0);
 
-            for(i = 0; i < ones; i++) {
-                romanNum += "I";
-            }
-        } 
+            romanNum += giveOnes(ones);
+        }
         return romanNum;
     }
 
@@ -156,6 +166,12 @@
       });
       QUnit.test('ezernyolcszaznegyvennyolc', function(assert) {
         assert.equal(convert(1848), "MDCCCXLVIII");
+      });
+      QUnit.test('hatszazkilenc', function(assert) {
+        assert.equal(convert(609), "DCIX");
+      });
+      QUnit.test('tizenegy', function(assert) {
+        assert.equal(convert(11), "XI");
       });
     });
   </script>
