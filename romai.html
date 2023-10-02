@@ -10,15 +10,20 @@
 
 <script>
     function convert(n) {
-        if (n == 1) {
-            return "I";
+        num = "";
+        
+        for(i = 0; i < n; i++) {
+            num += "I";
         }
-        return n;
+        return num;
     }
   
     QUnit.module('convert', function() {
       QUnit.test('egy', function(assert) {
         assert.equal(convert(1), "I");
+      });
+      QUnit.test('ketto', function(assert) {
+        assert.equal(convert(2), "II");
       });
     });
   </script>
