@@ -17,11 +17,12 @@
             thousands = String(n).charAt(0);
             hundreds = String(n).charAt(1);
             tens = String(n).charAt(2);
-            ones = String(n).charAt(1);
+            ones = String(n).charAt(3);
              
             romanNum += giveThousands(thousands);
             romanNum += giveHundreds(hundreds);
             romanNum += giveTens(tens);
+            romanNum += giveOnes(ones);
            
             
 
@@ -61,9 +62,6 @@
             else if(hundreds == 5) {
                 romanNum += "D";
             }
-            else if(hundreds == 6) {
-                romanNum += "DC";
-            }
             else if(hundreds >= 6 && hundreds < 9) {
                 romanNum += "D";
                 for(i = 0; i < (hundreds - 5); i++) {
@@ -91,9 +89,6 @@
             else if(tens == 5) {
                 romanNum += "L";
             }
-            else if(tens == 6) {
-                romanNum += "LX";
-            }
             else if(tens >= 6 && tens < 9) {
                 romanNum += "L";
                 for(i = 0; i < (tens - 5); i++) {
@@ -102,6 +97,33 @@
             }
             else if(tens == 9) {
                 romanNum += "XC";
+            }
+
+        return romanNum;
+    }
+
+    function giveOnes(ones) {
+        romanNum = "";
+        
+        if(ones < 4) {
+                for(i = 0; i < ones; i++) {
+                    romanNum += "I";
+                }
+            }
+            else if(ones == 4) {
+                romanNum += "IV";
+            }
+            else if(ones == 5) {
+                romanNum += "V";
+            }
+            else if(ones >= 6 && ones < 9) {
+                romanNum += "V";
+                for(i = 0; i < (ones - 5); i++) {
+                    romanNum += "I";
+                }
+            }
+            else if(ones == 9) {
+                romanNum += "IX";
             }
 
         return romanNum;
@@ -128,6 +150,12 @@
       });
       QUnit.test('ezernyolcszaznegyven', function(assert) {
         assert.equal(convert(1840), "MDCCCXL");
+      });
+      QUnit.test('kettoeezer-harom', function(assert) {
+        assert.equal(convert(2003), "MMIII");
+      });
+      QUnit.test('ezernyolcszaznegyvennyolc', function(assert) {
+        assert.equal(convert(1848), "MDCCCXLVIII");
       });
     });
   </script>
