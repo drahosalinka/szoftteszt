@@ -20,30 +20,9 @@
             ones = String(n).charAt(1);
              
             romanNum += giveThousands(thousands);
-
-            if(hundreds < 4) {
-                for(i = 0; i < hundreds; i++) {
-                    romanNum += "C";
-                }
-            }
-            else if(hundreds == 4) {
-                romanNum += "CD";
-            }
-            else if(hundreds == 5) {
-                romanNum += "D";
-            }
-            else if(hundreds == 6) {
-                romanNum += "DC";
-            }
-            else if(hundreds >= 6 && hundreds < 9) {
-                romanNum += "D";
-                for(i = 0; i < (hundreds - 5); i++) {
-                    romanNum += "C";
-                }
-            }
-            else if(hundreds == 9) {
-                romanNum += "CM";
-            }
+            romanNum += giveHundreds(hundreds);
+            romanNum += giveTens(tens);
+           
             
 
             
@@ -67,6 +46,66 @@
 
         return romanNum;
     }
+
+    function giveHundreds(hundreds) {
+        romanNum = "";
+        
+        if(hundreds < 4) {
+                for(i = 0; i < hundreds; i++) {
+                    romanNum += "C";
+                }
+            }
+            else if(hundreds == 4) {
+                romanNum += "CD";
+            }
+            else if(hundreds == 5) {
+                romanNum += "D";
+            }
+            else if(hundreds == 6) {
+                romanNum += "DC";
+            }
+            else if(hundreds >= 6 && hundreds < 9) {
+                romanNum += "D";
+                for(i = 0; i < (hundreds - 5); i++) {
+                    romanNum += "C";
+                }
+            }
+            else if(hundreds == 9) {
+                romanNum += "CM";
+            }
+
+        return romanNum;
+    }
+
+    function giveTens(tens) {
+        romanNum = "";
+        
+        if(tens < 4) {
+                for(i = 0; i < tens; i++) {
+                    romanNum += "X";
+                }
+            }
+            else if(tens == 4) {
+                romanNum += "XL";
+            }
+            else if(tens == 5) {
+                romanNum += "L";
+            }
+            else if(tens == 6) {
+                romanNum += "LX";
+            }
+            else if(tens >= 6 && tens < 9) {
+                romanNum += "L";
+                for(i = 0; i < (tens - 5); i++) {
+                    romanNum += "X";
+                }
+            }
+            else if(tens == 9) {
+                romanNum += "XC";
+            }
+
+        return romanNum;
+    }
   
     QUnit.module('convert', function() {
       QUnit.test('egy', function(assert) {
@@ -83,6 +122,12 @@
       });
       QUnit.test('kettoezer-hetszaz', function(assert) {
         assert.equal(convert(2700), "MMDCC");
+      });
+      QUnit.test('ezerkettoszazotven', function(assert) {
+        assert.equal(convert(1250), "MCCL");
+      });
+      QUnit.test('ezernyolcszaznegyven', function(assert) {
+        assert.equal(convert(1840), "MDCCCXL");
       });
     });
   </script>
