@@ -10,8 +10,22 @@
 
 <script>
 
-    function moon(action, direction, coordinates) {
 
+    function moon(action, direction, coordinates) {
+        obstacles = [[1, 2], [3, 5], [8, 4]];
+        obstacle = lookForObstacle(action, direction, coordinates)
+
+        if(obstacle == "false") {
+            coordinates = doAction(action, direction, coordinates);
+        }
+        else if(obstacle == "true") {
+            print("Obstacle");
+        }
+       
+        return coordinates;
+    }
+
+    function doAction(action, direction, coordinates) {
         if(action == 'f' ) {
             coordinates = forward(direction, coordinates);
         }
@@ -24,7 +38,7 @@
         else if(action == 'r' ) {
             coordinates = right(direction, coordinates);
         }
-       
+
         return coordinates;
     }
 
@@ -154,6 +168,22 @@
             coordinates[1] = 9+coordinates[1];
             return coordinates;
         }
+    }
+
+    function lookForObstacle(action, direction, coordinates, obstacles) {
+        obstacle = "false";
+
+        coordinates = doAction(action, direction, coordinates);
+
+        for(i = 0; i++; i <= 8) {
+                    for(j = 0; j++; j <= 8) {
+                        if(obstacles[i, j] == coordinates) {
+                            obstacle = "true";
+                        }
+                    }
+                }
+
+        return obstacle;
     }
   
     QUnit.module('moon', function() {
