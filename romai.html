@@ -173,5 +173,41 @@
       QUnit.test('tizenegy', function(assert) {
         assert.equal(convert(11), "XI");
       });
+      QUnit.test('ezer', function(assert) {
+        assert.equal(convert(1000), "M");
+      });
+      QUnit.test('kilencszaz', function(assert) {
+        assert.equal(convert(900), "CM");
+      });
+      QUnit.test('otszaz', function(assert) {
+        assert.equal(convert(500), "D");
+      });
+      QUnit.test('negyszaz', function(assert) {
+        assert.equal(convert(400), "CD");
+      });
+      QUnit.test('szaz', function(assert) {
+        assert.equal(convert(100), "C");
+      });
+      QUnit.test('kilencven', function(assert) {
+        assert.equal(convert(90), "XC");
+      });
+      QUnit.test('otven', function(assert) {
+        assert.equal(convert(50), "L");
+      });
+      QUnit.test('negyven', function(assert) {
+        assert.equal(convert(40), "XL");
+      });
+      QUnit.test('tiz', function(assert) {
+        assert.equal(convert(10), "X");
+      });
+      QUnit.test('kilenc', function(assert) {
+        assert.equal(convert(9), "IX");
+      });
+      QUnit.test('ot', function(assert) {
+        assert.equal(convert(5), "V");
+      });
+      QUnit.test('negy', function(assert) {
+        assert.equal(convert(4), "IV");
+      });
     });
   </script>
