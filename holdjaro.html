@@ -10,8 +10,7 @@
 
 <script>
 
-    function moon(action, direction) {
-        coordinates = [4, 4]
+    function moon(action, direction, coordinates) {
 
         if(action == 'f' ) {
             coordinates = forward(direction, coordinates);
@@ -41,16 +40,16 @@
             return coordinates;
         }
         else if(coordinates[0] < 0 && coordinates[1] >= 0) {
-            coordinates[0] = 9-coordinates[0];
+            coordinates[0] = 9+coordinates[0];
             return coordinates;
         }
         else if(coordinates[0] >= 0 && coordinates[1] < 0) {
-            coordinates[1] = 9-coordinates[1];
+            coordinates[1] = 9+coordinates[1];
             return coordinates;
         }
         else if(coordinates[0] < 0 && coordinates[1] < 0) {
-            coordinates[0] = 9-coordinates[0];
-            coordinates[1] = 9-coordinates[1];
+            coordinates[0] = 9+coordinates[0];
+            coordinates[1] = 9+coordinates[1];
             return coordinates;
         }
     }
@@ -73,44 +72,55 @@
             return coordinates;
         }
         else if(coordinates[0] < 0 && coordinates[1] >= 0) {
-            coordinates[0] = 9-coordinates[0];
+            coordinates[0] = 9+coordinates[0];
             return coordinates;
         }
         else if(coordinates[0] >= 0 && coordinates[1] < 0) {
-            coordinates[1] = 9-coordinates[1];
+            coordinates[1] = 9+coordinates[1];
             return coordinates;
         }
         else if(coordinates[0] < 0 && coordinates[1] < 0) {
-            coordinates[0] = 9-coordinates[0];
-            coordinates[1] = 9-coordinates[1];
+            coordinates[0] = 9+coordinates[0];
+            coordinates[1] = 9+coordinates[1];
             return coordinates;
         }
     }
   
     QUnit.module('moon', function() {
       QUnit.test('forward1', function(assert) {
-        assert.deepEqual(moon("f", "N"), [4, 3]);
+        assert.deepEqual(moon("f", "N", [4, 4]), [4, 3]);
       });
       QUnit.test('forward2', function(assert) {
-        assert.deepEqual(moon("f", "E"), [5, 4]);
+        assert.deepEqual(moon("f", "E", [4, 4]), [5, 4]);
       });
       QUnit.test('forward3', function(assert) {
-        assert.deepEqual(moon("f", "S"), [4, 5]);
+        assert.deepEqual(moon("f", "S", [4, 4]), [4, 5]);
       });
       QUnit.test('forward4', function(assert) {
-        assert.deepEqual(moon("f", "W"), [3, 4]);
+        assert.deepEqual(moon("f", "W", [4, 4]), [3, 4]);
       });
+      QUnit.test('forward5', function(assert) {
+        assert.deepEqual(moon("f", "W", [0, 7]), [8, 7]);
+      });
+    
+
+
       QUnit.test('backwards1', function(assert) {
-        assert.deepEqual(moon("b", "N"), [4, 5]);
+        assert.deepEqual(moon("b", "N", [4, 4]), [4, 5]);
       });
       QUnit.test('backwards2', function(assert) {
-        assert.deepEqual(moon("b", "E"), [3, 4]);
+        assert.deepEqual(moon("b", "E", [4, 4]), [3, 4]);
       });
       QUnit.test('backwards3', function(assert) {
-        assert.deepEqual(moon("b", "S"), [4, 3]);
+        assert.deepEqual(moon("b", "S", [4, 4]), [4, 3]);
       });
       QUnit.test('backwards4', function(assert) {
-        assert.deepEqual(moon("b", "W"), [5, 4]);
+        assert.deepEqual(moon("b", "W", [4, 4]), [5, 4]);
       });
+      QUnit.test('backwards5', function(assert) {
+        assert.deepEqual(moon("b", "S", [6, 0]), [6, 8]);
+      });
+
+      
     });
   </script>
