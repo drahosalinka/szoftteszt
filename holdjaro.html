@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Test Suite</title>
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.0.css">
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
+</body>
+
+<script>
+
+    function moon(action) {
+        coordinates = [4, 4]
+        direction = "N"
+
+        if(action == 'f' ) {
+            coordinates = forward(direction, coordinates);
+        }
+       
+        return coordinates;
+    }
+
+    function forward(direction, coordinates) {
+        if (direction == "N") {
+            coordinates[1] -= 1;
+        }
+        else if (direction == "E") {
+            coordinates[0] += 1;
+        }
+        else if (direction == "S") {
+            coordinates[1] += 1;
+        }
+        else if (direction == "W") {
+            coordinates[0] -= 1;
+        }
+
+        if(coordinates[0] >= 0 && coordinates[1] >= 0) {
+            return coordinates;
+        }
+        else if(coordinates[0] < 0 && coordinates[1] >= 0) {
+            coordinates[0] = 9-coordinates[0];
+            return coordinates;
+        }
+        else if(coordinates[0] >= 0 && coordinates[1] < 0) {
+            coordinates[1] = 9-coordinates[1];
+            return coordinates;
+        }
+        else if(coordinates[0] < 0 && coordinates[1] < 0) {
+            coordinates[0] = 9-coordinates[0];
+            coordinates[1] = 9-coordinates[1];
+            return coordinates;
+        }
+    }
+  
+    QUnit.module('moon', function() {
+      QUnit.test('forward1', function(assert) {
+        assert.deepEqual(moon("f"), [4, 3]);
+      });
+    });
+  </script>
