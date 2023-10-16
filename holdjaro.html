@@ -15,8 +15,14 @@
         if(action == 'f' ) {
             coordinates = forward(direction, coordinates);
         }
-        if(action == 'b' ) {
+        else if(action == 'b' ) {
             coordinates = backwards(direction, coordinates);
+        }
+        else if(action == 'l' ) {
+            coordinates = left(direction, coordinates);
+        }
+        else if(action == 'r' ) {
+            coordinates = right(direction, coordinates);
         }
        
         return coordinates;
@@ -85,6 +91,70 @@
             return coordinates;
         }
     }
+
+    function left(direction, coordinates) {
+        if (direction == "N") {
+            coordinates[0] -= 1;
+        }
+        else if (direction == "E") {
+            coordinates[1] += 1;
+        }
+        else if (direction == "S") {
+            coordinates[0] += 1;
+        }
+        else if (direction == "W") {
+            coordinates[1] -= 1;
+        }
+
+        if(coordinates[0] >= 0 && coordinates[1] >= 0) {
+            return coordinates;
+        }
+        else if(coordinates[0] < 0 && coordinates[1] >= 0) {
+            coordinates[0] = 9+coordinates[0];
+            return coordinates;
+        }
+        else if(coordinates[0] >= 0 && coordinates[1] < 0) {
+            coordinates[1] = 9+coordinates[1];
+            return coordinates;
+        }
+        else if(coordinates[0] < 0 && coordinates[1] < 0) {
+            coordinates[0] = 9+coordinates[0];
+            coordinates[1] = 9+coordinates[1];
+            return coordinates;
+        }
+    }
+
+    function right(direction, coordinates) {
+        if (direction == "S") {
+            coordinates[0] -= 1;
+        }
+        else if (direction == "W") {
+            coordinates[1] += 1;
+        }
+        else if (direction == "N") {
+            coordinates[0] += 1;
+        }
+        else if (direction == "E") {
+            coordinates[1] -= 1;
+        }
+
+        if(coordinates[0] >= 0 && coordinates[1] >= 0) {
+            return coordinates;
+        }
+        else if(coordinates[0] < 0 && coordinates[1] >= 0) {
+            coordinates[0] = 9+coordinates[0];
+            return coordinates;
+        }
+        else if(coordinates[0] >= 0 && coordinates[1] < 0) {
+            coordinates[1] = 9+coordinates[1];
+            return coordinates;
+        }
+        else if(coordinates[0] < 0 && coordinates[1] < 0) {
+            coordinates[0] = 9+coordinates[0];
+            coordinates[1] = 9+coordinates[1];
+            return coordinates;
+        }
+    }
   
     QUnit.module('moon', function() {
       QUnit.test('forward1', function(assert) {
@@ -121,6 +191,32 @@
         assert.deepEqual(moon("b", "S", [6, 0]), [6, 8]);
       });
 
-      
+
+      QUnit.test('left1', function(assert) {
+        assert.deepEqual(moon("l", "N", [4, 4]), [3, 4]);
+      });
+      QUnit.test('left2', function(assert) {
+        assert.deepEqual(moon("l", "E", [4, 4]), [4, 5]);
+      });
+      QUnit.test('left3', function(assert) {
+        assert.deepEqual(moon("l", "S", [4, 4]), [5, 4]);
+      });
+      QUnit.test('left4', function(assert) {
+        assert.deepEqual(moon("l", "W", [4, 4]), [4, 3]);
+      });
+
+
+      QUnit.test('right1', function(assert) {
+        assert.deepEqual(moon("r", "N", [4, 4]), [5, 4]);
+      });
+      QUnit.test('right2', function(assert) {
+        assert.deepEqual(moon("r", "E", [4, 4]), [4, 3]);
+      });
+      QUnit.test('right3', function(assert) {
+        assert.deepEqual(moon("r", "S", [4, 4]), [3, 4]);
+      });
+      QUnit.test('right4', function(assert) {
+        assert.deepEqual(moon("r", "W", [4, 4]), [4, 5]);
+      });
     });
   </script>
